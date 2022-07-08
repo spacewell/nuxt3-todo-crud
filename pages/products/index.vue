@@ -1,5 +1,5 @@
 <template>
   <div>
-    <h1>MainPage</h1>
+    <TheList />
   </div>
 </template>
