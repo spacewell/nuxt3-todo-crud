@@ -1,90 +1,92 @@
 <template>
-  <div class="wrapper" v-on:click="(e) => onClickHandler(e, item.id)">
-    <div class="item">
-      <span>{{ name }}</span>
-      <div class="buttons">
-        <button v-on:click.stop v-on:click="myHandler">Edit</button>
-        <button>Delete</button>
+  <div class="wrapper" @click="(e) => handleItemClick(e, product.id)">
+    <div class="todo-item">
+      <span class="todo-item__name">{{ product.name }}</span>
+      <div class="todo-item__actions">
+        <button @click.stop class="todo-item__edit-btn" type="button">Edit</button>
+        <button @click.stop class="todo-item__delete-btn" type="button">Delete</button>
       </div>
     </div>
   </div>
 </template>
 
-<script setup>
-  const props = defineProps({
-    name: {
-      type: String
-    },
-    item: {
-      type: Object
+<script lang='ts'>
+import { defineComponent } from 'vue'
+
+export default defineComponent({
+  props: {
+    product: {
+      type: Object,
+      default: {
+        id: null,
+        name: null
+      }
     }
-  })
+  },
 
-  const router = useRouter()
+  setup(props) {
+    const router = useRouter()
 
+    function handleItemClick(e, id) {
+      router.push({ path: `/products/${id}`})
+    }
 
-  function onClickHandler(e, id) {
-    router.push({ path: `/products/${id}`})
+    return {
+      handleItemClick,
+    }
   }
-
-  function myHandler() {
-  }
+})
 
 </script>
 
 
-<style scoped>
-
+<style lang='scss' scoped>
 .wrapper {
   padding: 10px;
   display: flex;
   flex-direction: column;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid var(--grey-border);
 }
 
-.wrapper:last-child {
-  border: none;
-}
-
-.item {
+.todo-item {
   padding: 10px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   user-select: none;
   width: 100%;
+
+
+  &__actions {
+    display: flex;
+    flex-direction: row;
+  }
+
+  &__edit-btn {
+    padding: 5px 15px;
+    background: var(--button);
+    color: var(--white-text);
+    border: none;
+    margin-right: 10px;
+  }
+
+  &__delete-btn{
+    padding: 5px 15px;
+    background: var(--button);
+    color: var(--white-text);
+    border: none;
+  }
+
+  &__edit-btn:hover {
+    background: var(--button-active);
+  }
+
+  &__delete-btn:hover {
+    background: var(--button-active);
+  }
 }
 
 .close {
   display: none;
 }
-
-.buttons {
-  display: flex;
-  flex-direction: row;
-}
-
-.buttons button:nth-child(1) {
-  padding: 5px 15px;
-  background: green;
-  color: #fff;
-  border: none;
-  margin-right: 10px;
-}
-
-.buttons button:nth-child(2) {
-  padding: 5px 15px;
-  background: red;
-  color: #fff;
-  border: none;
-}
-
-.buttons button:nth-child(2):hover {
-  background: #B60000;
-}
-
-.buttons button:nth-child(1):hover {
-  background: #006C08;
-}
-
 </style>

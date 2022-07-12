@@ -1,7 +1,7 @@
 <template>
   <div class="wrapper">
     <div class="back">
-      <button @click="back">Back</button>
+      <button @click="handleBackClick" class="button" type="button">Back</button>
     </div>
     <h3>
       Id: {{ id }}
@@ -12,53 +12,45 @@
   </div>
 </template>
 
-<script>
-import { defineComponent } from '@vue/composition-api'
-import {ref, onMounted, defineProps } from 'vue'
+<script lang='ts'>
+import { defineComponent } from 'vue'
 
 export default defineComponent({
   setup() {
     const route = useRoute()
     const router = useRouter()
 
-    const props = defineProps({
-      id: {
-        type: Number
-      }
-    })
-
-    function back() {
+    const handleBackClick = () => {
       router.back()
     }
 
-    onMounted(() => {
-      console.log(route.params)
-    })
-
-    return { back, id: route.params.id}
+    return {
+      handleBackClick,
+      id: route.params.id
+    }
   }
 })
 </script>
 
-<style scoped>
+<style lang='scss' scoped>
 .wrapper {
   padding: 10px;
-  border: 1px solid #000;
+  border: 1px solid var(--border-color);
 }
 
 .back {
   margin-bottom: 20px;
 }
 
-.back button {
+.button {
   padding: 10px 15px;
-  background: blue;
+  background-color: var(--button);
   border: none;
-  color: #fff;
+  color: var(--white-text);
   cursor: pointer;
 }
 
-.back button:active {
-  background: rgb(0, 0, 156);
+.button:active {
+  background: var(--button-active);
 }
 </style>

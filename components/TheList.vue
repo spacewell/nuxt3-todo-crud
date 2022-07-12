@@ -1,31 +1,51 @@
 <template>
   <div class="list">
+    <button class="add">Add Product</button>
     <TheItem
-      v-bind:key="item.name"
-      v-for="item in products"
-      :name="item.name"
-      :item="item"
+      v-for="product in products"
+      v-bind:key="product.id"
+      :product="product"
     />
   </div>
 </template>
 
-<script setup>
-  const products = [
-    {
-      id: 1,
-      name: 'Item1'
-    },
-    {
-      id: 2,
-      name: 'Item2'
-    }
-  ]
+<script lang='ts'>
+import { defineComponent } from 'vue'
+
+export default defineComponent({
+
+  setup() {
+    const products = [
+      {
+        id: 1,
+        name: 'Item1'
+      },
+      {
+        id: 2,
+        name: 'Item2'
+      }
+    ]
+
+    return { products }
+  }
+})
 </script>
 
 
-<style scoped>
+<style lang='scss' scoped>
 .list {
   padding: 10px;
-  border: 1px solid #000;
+  border: 1px solid var(--black-border);
+}
+
+.add {
+  padding: 10px 15px;
+  border:none;
+  color: var(--white-text);
+  background: var(--button)
+}
+
+.add:active {
+  background: var(--button-active)
 }
 </style>

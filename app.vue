@@ -7,15 +7,15 @@
   </div>
 </template>
 
-<style>
-*, *::before, *::after {
+<style lang='scss'>
+* {
   padding: 0px;
   margin: 0px;
   box-sizing: border-box;
 }
 
 .main-container {
-  width: 700px;
+  max-width: 700px;
   margin: 20px auto;
 }
 </style>

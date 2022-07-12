@@ -1,30 +1,27 @@
 <template>
   <div class="form">
     <div class="back">
-      <button @click="backHandler">Back</button>
+      <button @click="handleBackClick" type="button">Back</button>
     </div>
-
     <h1>{{ title }} product</h1>
-    
     <div>
       <input type="text" alt="" class="input"/>
     </div>
     <div class="save">
-      <button v-on:click="saveHandler">Save</button>
+      <button @click="handleSaveButtonClick" type="button">Save</button>
     </div>
   </div>
 </template>
 
-<script>
-import { defineComponent } from '@vue/composition-api'
+<script lang='ts'>
+import { defineComponent } from 'vue'
 
 export default defineComponent({
   setup() {
-
     const route = useRoute();
-    const router= useRouter();
+    const router = useRouter();
 
-    const title = ref('')
+    const title = ref(null)
 
     onMounted(() => {
       if(route.params.type === 'edit') {
@@ -34,27 +31,32 @@ export default defineComponent({
       }
     })
 
-    const saveHandler = () => {
+    // Handle, На какую кнопку ставят, событие
+    const handleSaveButtonClick = () => {
       console.log(route.params)
     }
 
-    const backHandler = () => {
+    const handleBackClick = () => {
       router.back()
     }
 
-    return { saveHandler, backHandler, title }
+    return {
+      handleSaveButtonClick,
+      handleBackClick,
+      title
+    }
   },
 })
 </script>
 
 
-<style scoped>
+<style lang='scss' scoped>
 .form {
   display: flex;
   flex-direction: column;
 }
 
-.input{
+.input {
   width: 100%;
   padding: 10px;
 }
@@ -65,15 +67,14 @@ div {
 
 button {
   padding: 10px 15px;
-  background: blue;
-  color: #fff;
+  background: var(--button);
+  color: var(--white-text);
   border: none;
 }
 
 button:active {
-  
+  background: var(--button-active);
 }
-
 
 .save {
   display: flex;

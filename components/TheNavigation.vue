@@ -4,13 +4,11 @@
   </div>
 </template>
 
-<style scoped>
-
+<style lang='scss' scoped>
 .container {
   width: 100%;
-  background: blue;
-  color: #fff;
+  background: var(--main-color);
+  color: var(--white-text);
   padding: 20px;
 }
-
 </style>
