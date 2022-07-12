@@ -1,0 +1,12 @@
+:root {
+  --grey-border: #ddd;
+  --white-background: #fff;
+  --white-text: #fff;
+  --black-border: #000;
+  --main-color: blue;
+  --button: blue;
+  --button-active: rgb(0, 0, 80);
+  --green-background: green;
+  --border-color: #000;
+
+}
